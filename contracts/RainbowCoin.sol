@@ -8,6 +8,8 @@ contract RainbowCoin is ERC721Full, Ownable {
     address public metadata;
 
     constructor(string memory name, string memory symbol, address _metadata) public ERC721Full(name, symbol) {
+        name = "RainbowCoin";
+        symbol = "RGB";
         metadata = _metadata;
     }
 

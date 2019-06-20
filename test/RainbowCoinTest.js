@@ -9,7 +9,7 @@ contract('RainbowCoin', async function (accounts) {
   let token;
 
   before(done => {
-    ;(async () => {
+    (async () => {
       try {
         var totalGas = new BigNumber(0)
 
@@ -25,7 +25,7 @@ contract('RainbowCoin', async function (accounts) {
         var tx = await web3.eth.getTransactionReceipt(token.transactionHash);
         totalGas = totalGas.plus(tx.gasUsed);
         console.log(_ + tx.gasUsed + ' - Deploy RainbowCoin');
-        token = await Sample.deployed();
+        token = await RainbowCoin.deployed();
 
         console.log(_ + '-----------------------');
         console.log(_ + totalGas.toFormat(0) + ' - Total Gas');
@@ -34,65 +34,75 @@ contract('RainbowCoin', async function (accounts) {
         console.error(error);
         done(false);
       }
-    })()
-  })
+    })();
+  });
 
   describe('RainbowCoin.sol', function () {
-    it('should pass', async function() {
+    it('Should pass', async () => {
       assert(
         true === true,
         'this is true'
       )
     });
 
-    it('should return metadata uints as strings', async function () {
-      const URI = 'https://rainbowco.in/metadata/'
+    it("Should make first account an owner", async () => {
+      let instance = await RainbowCoin.deployed();
+      let owner = await instance.owner();
+      assert.equal(owner, accounts[0]);
+    });
 
-      let tokenURI_uint = 122312;
-      let tokenURI_result = await token.tokenURI(tokenURI_uint);
+    it('Should return metadata uints as strings', async () => {
+      const URI = 'https://rainbowco.in/metadata/';
+
+      let instance = await RainbowCoin.deployed();
+      let tokenURI_uint = 12;
+      let tokenURI_result = await instance.tokenURI(tokenURI_uint);
+
       assert(
         URI + tokenURI_uint.toString() === tokenURI_result,
         'incorrect value "' + tokenURI_result + '" returned'
       )
     });
 
-    it('should mint a token from the owner account', async function () {
-      // begin with zero balance
-      let zeroBalance = await token.totalSupply();
+    it('Should mint a token from the owner account', async () => {
+      let instance = await RainbowCoin.deployed();
+
+      // Begin with zero balance
+      let zeroBalance = await instance.totalSupply();
       assert(
         zeroBalance.toString(10) === '0',
         "Contract should have no tokens at this point"
       )
 
-      // try minting a new token and checking the totalSupply
+      // Try minting a new token and checking the totalSupply
       try {
-        await token.mint(accounts[0]);
+        await instance.mint(accounts[0]);
       } catch (error) {
         console.log(error);
         assert(false, error);
       }
-      let totalSupply = await token.totalSupply();
+      let totalSupply = await instance.totalSupply();
       assert(
         totalSupply.toString(10) === '1',
         "Contract should have balance of 1 instead it has " + totalSupply.toString(10)
       )
 
       // check that the balance increased to 1
-      let ownerBalance = await token.balanceOf(accounts[0]);
+      let ownerBalance = await instance.balanceOf(accounts[0]);
       assert(
         ownerBalance.toString(10) === '1',
         "Owner account should have 1 token instead it has " + ownerBalance.toString(10)
       )
 
       // make sure the token at index 0 has id 1
-      let tokenId = await token.tokenOfOwnerByIndex(accounts[0], "0");
+      let tokenId = await instance.tokenOfOwnerByIndex(accounts[0], "0");
       assert(
         tokenId.toString(10) === '1',
         "Token at index 0 is " + tokenId.toString(10)
       )
     });
-  })
-})
+  });
+});
 
 function getBlockNumber() {
   return new Promise((resolve, reject) => {
@@ -118,8 +128,7 @@ function increaseBlocks(blocks) {
 
 function increaseBlock() {
   return new Promise((resolve, reject) => {
-    web3.currentProvider.sendAsync(
-      {
+    web3.currentProvider.sendAsync({
         jsonrpc: '2.0',
         method: 'evm_mine',
         id: 12345
@@ -137,12 +146,12 @@ function decodeEventString(hexVal) {
     .match(/.{1,2}/g)
     .map(a =>
       a
-        .toLowerCase()
-        .split('')
-        .reduce(
-          (result, ch) => result * 16 + '0123456789abcdefgh'.indexOf(ch),
-          0
-        )
+      .toLowerCase()
+      .split('')
+      .reduce(
+        (result, ch) => result * 16 + '0123456789abcdefgh'.indexOf(ch),
+        0
+      )
     )
     .map(a => String.fromCharCode(a))
     .join('')
