@@ -1,9 +1,9 @@
-var Metadata = artifacts.require('./Metadata.sol');
-var RainbowCoin = artifacts.require('./RainbowCoin.sol');
-var BigNumber = require('bignumber.js');
-let gasPrice = 1000000000; // 1GWEI
+const Metadata = artifacts.require('./Metadata.sol');
+const RainbowCoin = artifacts.require('./RainbowCoin.sol');
+const BigNumber = require('bignumber.js');
 
-let _ = '        ';
+const gasPrice = 1000000000; // 1GWEI
+const _ = '        ';
 
 contract('RainbowCoin', async function (accounts) {
   let token;
