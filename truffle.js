@@ -8,6 +8,13 @@ require("babel-polyfill");
 const HDWalletProvider = require('truffle-hdwallet-provider')
 
 module.exports = {
+  mocha: {
+    reporter: 'eth-gas-reporter',
+    reporterOptions: {
+      currency: 'USD',
+      gasPrice: 1
+    }
+  },
   networks: {
     develop: {
       provider() {

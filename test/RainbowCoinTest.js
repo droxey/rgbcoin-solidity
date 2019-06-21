@@ -1,35 +1,21 @@
 const Metadata = artifacts.require('./Metadata.sol');
 const RainbowCoin = artifacts.require('./RainbowCoin.sol');
 const assertRevert = require('./utils/assertRevert').assertRevert;
-const BigNumber = require('bignumber.js');
 
-const gasPrice = 1000000000; // 1GWEI
-const _ = '        ';
 
 contract('RainbowCoin', async function (accounts) {
-  let token;
 
   before(done => {
     (async () => {
       try {
-        var totalGas = new BigNumber(0)
-
         // Deploy Metadata.sol
-        metadata = await Metadata.new();
-        var tx = await web3.eth.getTransactionReceipt(metadata.transactionHash);
-        totalGas = totalGas.plus(tx.gasUsed);
-        console.log(_ + tx.gasUsed + ' - Deploy Metadata');
+        let metadata = await Metadata.new();
         metadata = await Metadata.deployed();
 
         // Deploy RainbowCoin.sol
-        token = await RainbowCoin.new();
-        var tx = await web3.eth.getTransactionReceipt(token.transactionHash);
-        totalGas = totalGas.plus(tx.gasUsed);
-        console.log(_ + tx.gasUsed + ' - Deploy RainbowCoin');
+        let token = await RainbowCoin.new("RainbowCoin", "RGB", metadata.address);
         token = await RainbowCoin.deployed();
 
-        console.log(_ + '-----------------------');
-        console.log(_ + totalGas.toFormat(0) + ' - Total Gas');
         done();
       } catch (error) {
         console.error(error);
