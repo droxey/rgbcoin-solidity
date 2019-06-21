@@ -6,12 +6,12 @@ import "./Metadata.sol";
 
 contract RainbowCoin is ERC721Full, Ownable {
     address public metadata;
-    uint256 public constant _totalSupply = uint256(16581375); // (255 * 255 * 255)
+    //uint256 public constant _totalSupply = uint256(16581375); // (255 * 255 * 255)
 
     struct RGBColor {
-        uint red;
-        uint green;
-        uint blue;
+        uint8 red;
+        uint8 green;
+        uint8 blue;
     }
 
     RGBColor[] colors;
@@ -22,11 +22,11 @@ contract RainbowCoin is ERC721Full, Ownable {
         metadata = _metadata;
     }
 
-    function totalSupply() public view returns (uint256) {
-        return _totalSupply;
-    }
+    // function totalSupply() public view returns (uint256) {
+    //     return _totalSupply;
+    // }
 
-    function getColor(uint _colorId) public view returns(uint red, uint green, uint blue) {
+    function getColor(uint _colorId) public view returns(uint8 red, uint8 green, uint8 blue) {
         RGBColor memory _color = colors[_colorId];
 
         red = _color.red;
@@ -34,9 +34,9 @@ contract RainbowCoin is ERC721Full, Ownable {
         blue = _color.blue;
     }
 
-    function mint(uint _red, uint _green, uint _blue) public onlyOwner {
+    function mint(uint8 _red, uint8 _green, uint8 _blue) public onlyOwner {
         RGBColor memory _color = RGBColor({ red: _red, green: _green, blue: _blue });
-        uint _colorId = colors.push(_color) + 1;
+        uint _colorId = colors.push(_color);
         _mint(msg.sender, _colorId);
     }
 

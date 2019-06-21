@@ -76,11 +76,12 @@ contract('RainbowCoin', async function (accounts) {
 
       // Try minting a new token and checking the totalSupply
       try {
-        await instance.mint(accounts[0]);
+        await instance.mint(255, 0, 0);
       } catch (error) {
         console.log(error);
         assert(false, error);
       }
+      
       let totalSupply = await instance.totalSupply();
       assert(
         totalSupply.toString(10) === '1',
