@@ -1,5 +1,5 @@
-var Sample = require('./build/contracts/Sample.json')
+var RainbowCoin = require('./build/contracts/RainbowCoin.json')
 
 module.exports = {
-  Sample: Sample
+  RainbowCoin: RainbowCoin
 }
