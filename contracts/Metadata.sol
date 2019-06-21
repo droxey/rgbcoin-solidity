@@ -12,9 +12,11 @@ contract Metadata {
     }
 
     function uint2str(uint i) internal pure returns (string memory) {
-        if (i == 0)
+        uint _tmpI = i;
+
+        if (_tmpI == 0)
             return "0";
-        uint j = i;
+        uint j = _tmpI;
         uint length;
         while (j != 0) {
             length++;
@@ -22,16 +24,18 @@ contract Metadata {
         }
         bytes memory bstr = new bytes(length);
         uint k = length - 1;
-        while (i != 0) {
-            uint _uint = 48 + i % 10;
+        while (_tmpI != 0) {
+            uint _uint = 48 + _tmpI % 10;
             bstr[k--] = toBytes(_uint)[31];
-            i /= 10;
+            _tmpI /= 10;
         }
         return string(bstr);
     }
 
     function toBytes(uint256 x) public pure returns (bytes memory b) {
         b = new bytes(32);
-        assembly { mstore(add(b, 32), x) }
+        assembly {
+            mstore(add(b, 32), x)
+        }
     }
 }
