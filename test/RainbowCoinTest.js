@@ -1,5 +1,6 @@
 const Metadata = artifacts.require('./Metadata.sol');
 const RainbowCoin = artifacts.require('./RainbowCoin.sol');
+const assertRevert = require('./utils/assertRevert').assertRevert;
 const BigNumber = require('bignumber.js');
 
 const gasPrice = 1000000000; // 1GWEI
@@ -102,6 +103,24 @@ contract('RainbowCoin', async function (accounts) {
         "Token at index 0 is " + tokenId.toString(10)
       )
     });
+
+    it("Should mint to the owner only", async () => {
+      let instance = await RainbowCoin.deployed();
+      let other = accounts[1];
+
+      await instance.transferOwnership(other);
+      await assertRevert(instance.mint(255, 255, 200));
+    });
+
+    // it("Should create token with specified RGB values", async () => {
+    //   let instance = await RainbowCoin.deployed();
+    //   let owner = await instance.owner();
+
+    //   let token = await instance.mint(0, 255, 255);
+    //   let color = await instance.getColor(token);
+
+    //   assert.deepEqual(color, [0, 255, 255]);
+    // });
   });
 });
 
