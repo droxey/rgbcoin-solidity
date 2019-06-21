@@ -19,7 +19,7 @@ library Strings {
 
         for (; _len >= 32; _len -= 32) {
             assembly {  // solium-disable-line security/no-inline-assembly
-                mstore(dest, mload(_src))
+                mstore(_dest, mload(_src))
             }
             _dest += 32;
             _src += 32;
