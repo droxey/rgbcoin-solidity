@@ -6,7 +6,7 @@ import "./Metadata.sol";
 
 contract RainbowCoin is ERC721Full, Ownable {
     address public metadata;
-    //uint256 public constant _totalSupply = uint256(16581375); // (255 * 255 * 255)
+    uint256 public constant maxSupply = uint256(16581375); // (255 * 255 * 255)
 
     struct RGBColor {
         uint8 red;
@@ -21,10 +21,6 @@ contract RainbowCoin is ERC721Full, Ownable {
         symbol = "RGB";
         metadata = _metadata;
     }
-
-    // function totalSupply() public view returns (uint256) {
-    //     return _totalSupply;
-    // }
 
     function getColor(uint _colorId) public view returns(uint8 red, uint8 green, uint8 blue) {
         RGBColor memory _color = colors[_colorId];
