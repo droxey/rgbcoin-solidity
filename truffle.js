@@ -1,4 +1,10 @@
 require('dotenv').config()
+
+require("babel-register")({
+  ignore: /node_modules\/(?!zeppelin-solidity)/
+});
+require("babel-polyfill");
+
 const HDWalletProvider = require('truffle-hdwallet-provider')
 
 module.exports = {

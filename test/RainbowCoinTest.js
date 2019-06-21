@@ -81,7 +81,7 @@ contract('RainbowCoin', async function (accounts) {
         console.log(error);
         assert(false, error);
       }
-      
+
       let totalSupply = await instance.totalSupply();
       assert(
         totalSupply.toString(10) === '1',
