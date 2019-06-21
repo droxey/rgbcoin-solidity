@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 import "./helpers/strings.sol";
 
 contract Metadata {
-    using strings for *;
+    using Strings for *;
 
     function tokenURI(uint _tokenId) public pure returns (string memory _infoUrl) {
         string memory base = "https://rainbowco.in/metadata/";
@@ -34,7 +34,7 @@ contract Metadata {
 
     function toBytes(uint256 x) public pure returns (bytes memory b) {
         b = new bytes(32);
-        assembly {
+        assembly {  // solium-disable-line security/no-inline-assembly
             mstore(add(b, 32), x)
         }
     }

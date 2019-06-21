@@ -40,12 +40,12 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"toBytes\",\"outputs\":[{\"name\":\"b\",\"type\":\"bytes\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"name\":\"_infoUrl\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/droxey/dev/repos/rainbowcoin/contracts/Metadata.sol\":\"Metadata\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/droxey/dev/repos/rainbowcoin/contracts/Metadata.sol\":{\"keccak256\":\"0x2a447dbed542d5394c8d34c8463efb42c5b76f67fce812a523fce4fee8040aa6\",\"urls\":[\"bzzr://da81e0f33c7021b418fea366e8ba75793db4956673af8eb1b78768e39cda579b\"]},\"/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol\":{\"keccak256\":\"0xcc0392880159cce5f64a840fe81abd1b9a59dab0971019f8a1e86d465e807bd0\",\"urls\":[\"bzzr://2eb9a7bc14d4bdb589daae3108bac97105a1daa6fe31a4cf1b105a99ac7d4f81\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b506104d6806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063775a8f5e1461003b578063c87b56dd146100e2575b600080fd5b6100676004803603602081101561005157600080fd5b8101908080359060200190929190505050610189565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a757808201518184015260208101905061008c565b50505050905090810190601f1680156100d45780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b61010e600480360360208110156100f857600080fd5b81019080803590602001909291905050506101cd565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561014e578082015181840152602081019050610133565b50505050905090810190601f16801561017b5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b606060206040519080825280601f01601f1916602001820160405280156101bf5781602001600182028038833980820191505090505b509050816020820152919050565b6060806040518060400160405280601e81526020017f68747470733a2f2f7261696e626f77636f2e696e2f6d657461646174612f00008152509050606061021384610241565b905061023861022182610397565b61022a84610397565b6103c590919063ffffffff16565b92505050919050565b60606000829050600081141561028f576040518060400160405280600181526020017f3000000000000000000000000000000000000000000000000000000000000000815250915050610392565b600081905060005b600082146102b9578080600101915050600a82816102b157fe5b049150610297565b6060816040519080825280601f01601f1916602001820160405280156102ee5781602001600182028038833980820191505090505b50905060006001830390505b60008514610389576000600a868161030e57fe5b06603001905061031d81610189565b601f8151811061032957fe5b602001015160f81c60f81b8383806001900394508151811061034757fe5b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a905350600a868161038057fe5b049550506102fa565b81955050505050505b919050565b61039f610490565b600060208301905060405180604001604052808451815260200182815250915050919050565b60608082600001518460000151016040519080825280601f01601f1916602001820160405280156104055781602001600182028038833980820191505090505b50905060006020820190506104238186602001518760000151610447565b61043c8560000151820185602001518660000151610447565b819250505092915050565b5b6020811061046b5781518352602083019250602082019150602081039050610448565b60006001826020036101000a0390508019835116818551168181178652505050505050565b60405180604001604052806000815260200160008152509056fea165627a7a723058207ee0d45da2928e129453737b6ada092a0ad15765b4592957e49d5195f32d7de60029",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063775a8f5e1461003b578063c87b56dd146100e2575b600080fd5b6100676004803603602081101561005157600080fd5b8101908080359060200190929190505050610189565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a757808201518184015260208101905061008c565b50505050905090810190601f1680156100d45780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b61010e600480360360208110156100f857600080fd5b81019080803590602001909291905050506101cd565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561014e578082015181840152602081019050610133565b50505050905090810190601f16801561017b5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b606060206040519080825280601f01601f1916602001820160405280156101bf5781602001600182028038833980820191505090505b509050816020820152919050565b6060806040518060400160405280601e81526020017f68747470733a2f2f7261696e626f77636f2e696e2f6d657461646174612f00008152509050606061021384610241565b905061023861022182610397565b61022a84610397565b6103c590919063ffffffff16565b92505050919050565b60606000829050600081141561028f576040518060400160405280600181526020017f3000000000000000000000000000000000000000000000000000000000000000815250915050610392565b600081905060005b600082146102b9578080600101915050600a82816102b157fe5b049150610297565b6060816040519080825280601f01601f1916602001820160405280156102ee5781602001600182028038833980820191505090505b50905060006001830390505b60008514610389576000600a868161030e57fe5b06603001905061031d81610189565b601f8151811061032957fe5b602001015160f81c60f81b8383806001900394508151811061034757fe5b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a905350600a868161038057fe5b049550506102fa565b81955050505050505b919050565b61039f610490565b600060208301905060405180604001604052808451815260200182815250915050919050565b60608082600001518460000151016040519080825280601f01601f1916602001820160405280156104055781602001600182028038833980820191505090505b50905060006020820190506104238186602001518760000151610447565b61043c8560000151820185602001518660000151610447565b819250505092915050565b5b6020811061046b5781518352602083019250602082019150602081039050610448565b60006001826020036101000a0390508019835116818551168181178652505050505050565b60405180604001604052806000815260200160008152509056fea165627a7a723058207ee0d45da2928e129453737b6ada092a0ad15765b4592957e49d5195f32d7de60029",
-  "sourceMap": "58:995:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;58:995:0;;;;;;;",
-  "deployedSourceMap": "58:995:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;58:995:0;;;;;;;;;;;;;;;;;;;;;;;;889:162;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;889:162:0;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;889:162:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;108:247;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;108:247:0;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;108:247:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;889:162;938:14;978:2;968:13;;;;;;;;;;;;;;;;;;;;;;;;;29:1:-1;21:6;17:14;116:4;104:10;96:6;87:34;147:4;139:6;135:17;125:27;;0:156;968:13:0;;;;964:17;;1033:1;1028:2;1025:1;1021:10;1014:21;1000:45;;;:::o;108:247::-;162:22;196:18;:53;;;;;;;;;;;;;;;;;;;259:16;278:18;287:8;278;:18::i;:::-;259:37;;313:35;335:12;:2;:10;:12::i;:::-;313:14;:4;:12;:14::i;:::-;:21;;:35;;;;:::i;:::-;306:42;;;;108:247;;;:::o;361:522::-;410:13;435:10;448:1;435:14;;473:1;464:5;:10;460:38;;;488:10;;;;;;;;;;;;;;;;;;;;;;460:38;508:6;517:5;508:14;;532:11;553:69;565:1;560;:6;553:69;;582:8;;;;;;;609:2;604:7;;;;;;;;;553:69;;;631:17;661:6;651:17;;;;;;;;;;;;;;;;;;;;;;;;;29:1:-1;21:6;17:14;116:4;104:10;96:6;87:34;147:4;139:6;135:17;125:27;;0:156;651:17:0;;;;631:37;;678:6;696:1;687:6;:10;678:19;;707:141;723:1;714:5;:10;707:141;;740:10;766:2;758:5;:10;;;;;;753:2;:15;740:28;;794:14;802:5;794:7;:14::i;:::-;809:2;794:18;;;;;;;;;;;;;;;;782:4;787:3;;;;;;;782:9;;;;;;;;;;;:30;;;;;;;;;;;835:2;826:11;;;;;;;;;707:141;;;;871:4;857:19;;;;;;;361:522;;;;:::o;979:210:3:-;1039:12;;:::i;:::-;1063:8;1121:4;1115;1111:15;1104:22;;1152:30;;;;;;;;1164:4;1158:18;1152:30;;;;1178:3;1152:30;;;1145:37;;;979:210;;;:::o;1476:375::-;1554:13;1579:17;1622:5;:10;;;1610:4;:9;;;:22;1599:34;;;;;;;;;;;;;;;;;;;;;;;;;29:1:-1;21:6;17:14;116:4;104:10;96:6;87:34;147:4;139:6;135:17;125:27;;0:156;1599:34:3;;;;1579:54;;1643:11;1706:2;1701:3;1697:12;1687:22;;1728:36;1735:6;1743:4;:9;;;1754:4;:9;;;1728:6;:36::i;:::-;1774:50;1790:4;:9;;;1781:6;:18;1801:5;:10;;;1813:5;:10;;;1774:6;:50::i;:::-;1841:3;1834:10;;;;1476:375;;;;:::o;230:549::-;350:165;364:2;357:3;:9;350:165;;439:3;433:10;427:4;420:24;479:2;471:10;;;;502:2;495:9;;;;375:2;368:9;;;;350:165;;;557:9;589:1;582:3;577:2;:8;569:3;:17;:21;557:33;;658:4;654:9;648:3;642:10;638:26;710:4;703;697:11;693:22;754:7;744:8;741:21;735:4;728:35;609:164;;;;;;:::o;58:995:0:-;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "pragma solidity ^0.5.0;\n\nimport \"./helpers/strings.sol\";\n\ncontract Metadata {\n    using strings for *;\n\n    function tokenURI(uint _tokenId) public pure returns (string memory _infoUrl) {\n        string memory base = \"https://rainbowco.in/metadata/\";\n        string memory id = uint2str(_tokenId);\n        return base.toSlice().concat(id.toSlice());\n    }\n\n    function uint2str(uint i) internal pure returns (string memory) {\n        uint _tmpI = i;\n\n        if (_tmpI == 0)\n            return \"0\";\n        uint j = _tmpI;\n        uint length;\n        while (j != 0) {\n            length++;\n            j /= 10;\n        }\n        bytes memory bstr = new bytes(length);\n        uint k = length - 1;\n        while (_tmpI != 0) {\n            uint _uint = 48 + _tmpI % 10;\n            bstr[k--] = toBytes(_uint)[31];\n            _tmpI /= 10;\n        }\n        return string(bstr);\n    }\n\n    function toBytes(uint256 x) public pure returns (bytes memory b) {\n        b = new bytes(32);\n        assembly {\n            mstore(add(b, 32), x)\n        }\n    }\n}\n",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"toBytes\",\"outputs\":[{\"name\":\"b\",\"type\":\"bytes\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"name\":\"_infoUrl\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/droxey/dev/repos/rainbowcoin/contracts/Metadata.sol\":\"Metadata\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/droxey/dev/repos/rainbowcoin/contracts/Metadata.sol\":{\"keccak256\":\"0xc680174e715d94da0d9631e486c9f8947f90a2d800623da7606d6e05fecc071c\",\"urls\":[\"bzzr://b8a44786d7b63e97001155692e3d9ac29817585d169b9a0707e1cbb3f405458a\"]},\"/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol\":{\"keccak256\":\"0x86277429b57828db2ac55960d3b04a85ef9e7f14827ef2fe5ea6b2200de5bb94\",\"urls\":[\"bzzr://bd47bdae8f030295e31738e1889ea9d9bb568f33f99784a9980a4bd3909da7a2\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506104e8806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063775a8f5e1461003b578063c87b56dd146100e2575b600080fd5b6100676004803603602081101561005157600080fd5b8101908080359060200190929190505050610189565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a757808201518184015260208101905061008c565b50505050905090810190601f1680156100d45780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b61010e600480360360208110156100f857600080fd5b81019080803590602001909291905050506101cd565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561014e578082015181840152602081019050610133565b50505050905090810190601f16801561017b5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b606060206040519080825280601f01601f1916602001820160405280156101bf5781602001600182028038833980820191505090505b509050816020820152919050565b6060806040518060400160405280601e81526020017f68747470733a2f2f7261696e626f77636f2e696e2f6d657461646174612f00008152509050606061021384610241565b905061023861022182610397565b61022a84610397565b6103c590919063ffffffff16565b92505050919050565b60606000829050600081141561028f576040518060400160405280600181526020017f3000000000000000000000000000000000000000000000000000000000000000815250915050610392565b600081905060005b600082146102b9578080600101915050600a82816102b157fe5b049150610297565b6060816040519080825280601f01601f1916602001820160405280156102ee5781602001600182028038833980820191505090505b50905060006001830390505b60008514610389576000600a868161030e57fe5b06603001905061031d81610189565b601f8151811061032957fe5b602001015160f81c60f81b8383806001900394508151811061034757fe5b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a905350600a868161038057fe5b049550506102fa565b81955050505050505b919050565b61039f6104a2565b600060208301905060405180604001604052808451815260200182815250915050919050565b60608082600001518460000151016040519080825280601f01601f1916602001820160405280156104055781602001600182028038833980820191505090505b50905060006020820190506104238186602001518760000151610447565b61043c8560000151820185602001518660000151610447565b819250505092915050565b6000819050600083905060008590505b6020831061047a5781518652602081019050602082019150602083039250610457565b60006001846020036101000a0390508019835116818351168181178452505050505050505050565b60405180604001604052806000815260200160008152509056fea165627a7a72305820e4e822f213d9ecfc470e5875e7e9157b2ed3a49e480b35513f0605d0234693f10029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063775a8f5e1461003b578063c87b56dd146100e2575b600080fd5b6100676004803603602081101561005157600080fd5b8101908080359060200190929190505050610189565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a757808201518184015260208101905061008c565b50505050905090810190601f1680156100d45780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b61010e600480360360208110156100f857600080fd5b81019080803590602001909291905050506101cd565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561014e578082015181840152602081019050610133565b50505050905090810190601f16801561017b5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b606060206040519080825280601f01601f1916602001820160405280156101bf5781602001600182028038833980820191505090505b509050816020820152919050565b6060806040518060400160405280601e81526020017f68747470733a2f2f7261696e626f77636f2e696e2f6d657461646174612f00008152509050606061021384610241565b905061023861022182610397565b61022a84610397565b6103c590919063ffffffff16565b92505050919050565b60606000829050600081141561028f576040518060400160405280600181526020017f3000000000000000000000000000000000000000000000000000000000000000815250915050610392565b600081905060005b600082146102b9578080600101915050600a82816102b157fe5b049150610297565b6060816040519080825280601f01601f1916602001820160405280156102ee5781602001600182028038833980820191505090505b50905060006001830390505b60008514610389576000600a868161030e57fe5b06603001905061031d81610189565b601f8151811061032957fe5b602001015160f81c60f81b8383806001900394508151811061034757fe5b60200101907effffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1916908160001a905350600a868161038057fe5b049550506102fa565b81955050505050505b919050565b61039f6104a2565b600060208301905060405180604001604052808451815260200182815250915050919050565b60608082600001518460000151016040519080825280601f01601f1916602001820160405280156104055781602001600182028038833980820191505090505b50905060006020820190506104238186602001518760000151610447565b61043c8560000151820185602001518660000151610447565b819250505092915050565b6000819050600083905060008590505b6020831061047a5781518652602081019050602082019150602083039250610457565b60006001846020036101000a0390508019835116818351168181178452505050505050505050565b60405180604001604052806000815260200160008152509056fea165627a7a72305820e4e822f213d9ecfc470e5875e7e9157b2ed3a49e480b35513f0605d0234693f10029",
+  "sourceMap": "58:1047:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;58:1047:0;;;;;;;",
+  "deployedSourceMap": "58:1047:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;58:1047:0;;;;;;;;;;;;;;;;;;;;;;;;889:214;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;889:214:0;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;889:214:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;108:247;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;108:247:0;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;108:247:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;889:214;938:14;978:2;968:13;;;;;;;;;;;;;;;;;;;;;;;;;29:1:-1;21:6;17:14;116:4;104:10;96:6;87:34;147:4;139:6;135:17;125:27;;0:156;968:13:0;;;;964:17;;1085:1;1080:2;1077:1;1073:10;1066:21;1000:97;;;:::o;108:247::-;162:22;196:18;:53;;;;;;;;;;;;;;;;;;;259:16;278:18;287:8;278;:18::i;:::-;259:37;;313:35;335:12;:2;:10;:12::i;:::-;313:14;:4;:12;:14::i;:::-;:21;;:35;;;;:::i;:::-;306:42;;;;108:247;;;:::o;361:522::-;410:13;435:10;448:1;435:14;;473:1;464:5;:10;460:38;;;488:10;;;;;;;;;;;;;;;;;;;;;;460:38;508:6;517:5;508:14;;532:11;553:69;565:1;560;:6;553:69;;582:8;;;;;;;609:2;604:7;;;;;;;;;553:69;;;631:17;661:6;651:17;;;;;;;;;;;;;;;;;;;;;;;;;29:1:-1;21:6;17:14;116:4;104:10;96:6;87:34;147:4;139:6;135:17;125:27;;0:156;651:17:0;;;;631:37;;678:6;696:1;687:6;:10;678:19;;707:141;723:1;714:5;:10;707:141;;740:10;766:2;758:5;:10;;;;;;753:2;:15;740:28;;794:14;802:5;794:7;:14::i;:::-;809:2;794:18;;;;;;;;;;;;;;;;782:4;787:3;;;;;;;782:9;;;;;;;;;;;:30;;;;;;;;;;;835:2;826:11;;;;;;;;;707:141;;;;871:4;857:19;;;;;;;361:522;;;;:::o;1170:262:3:-;1230:12;;:::i;:::-;1254:8;1364:4;1358;1354:15;1347:22;;1395:30;;;;;;;;1407:4;1401:18;1395:30;;;;1421:3;1395:30;;;1388:37;;;1170:262;;;:::o;1719:427::-;1797:13;1822:17;1865:5;:10;;;1853:4;:9;;;:22;1842:34;;;;;;;;;;;;;;;;;;;;;;;;;29:1:-1;21:6;17:14;116:4;104:10;96:6;87:34;147:4;139:6;135:17;125:27;;0:156;1842:34:3;;;;1822:54;;1886:11;2001:2;1996:3;1992:12;1982:22;;2023:36;2030:6;2038:4;:9;;;2049:4;:9;;;2023:6;:36::i;:::-;2069:50;2085:4;:9;;;2076:6;:18;2096:5;:10;;;2108:5;:10;;;2069:6;:50::i;:::-;2136:3;2129:10;;;;1719:427;;;;:::o;230:740::-;350:9;362:3;350:15;;375:9;387:3;375:15;;400:10;413:4;400:17;;428:222;443:2;435:4;:10;428:222;;571:4;565:11;559:4;552:25;613:2;604:11;;;;637:2;629:10;;;;455:2;447:10;;;;428:222;;;692:9;725:1;717:4;712:2;:9;704:3;:18;:22;692:34;;847:4;843:9;836:4;830:11;826:27;900:4;892:5;886:12;882:23;945:7;935:8;932:21;925:5;918:36;745:219;;;;;;;;;:::o;58:1047:0:-;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.5.0;\n\nimport \"./helpers/strings.sol\";\n\ncontract Metadata {\n    using Strings for *;\n\n    function tokenURI(uint _tokenId) public pure returns (string memory _infoUrl) {\n        string memory base = \"https://rainbowco.in/metadata/\";\n        string memory id = uint2str(_tokenId);\n        return base.toSlice().concat(id.toSlice());\n    }\n\n    function uint2str(uint i) internal pure returns (string memory) {\n        uint _tmpI = i;\n\n        if (_tmpI == 0)\n            return \"0\";\n        uint j = _tmpI;\n        uint length;\n        while (j != 0) {\n            length++;\n            j /= 10;\n        }\n        bytes memory bstr = new bytes(length);\n        uint k = length - 1;\n        while (_tmpI != 0) {\n            uint _uint = 48 + _tmpI % 10;\n            bstr[k--] = toBytes(_uint)[31];\n            _tmpI /= 10;\n        }\n        return string(bstr);\n    }\n\n    function toBytes(uint256 x) public pure returns (bytes memory b) {\n        b = new bytes(32);\n        assembly {  // solium-disable-line security/no-inline-assembly\n            mstore(add(b, 32), x)\n        }\n    }\n}\n",
   "sourcePath": "/Users/droxey/dev/repos/rainbowcoin/contracts/Metadata.sol",
   "ast": {
     "absolutePath": "/Users/droxey/dev/repos/rainbowcoin/contracts/Metadata.sol",
@@ -74,7 +74,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 131,
-        "sourceUnit": 383,
+        "sourceUnit": 395,
         "src": "25:31:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -97,13 +97,13 @@
             "libraryName": {
               "contractScope": null,
               "id": 3,
-              "name": "strings",
+              "name": "Strings",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 382,
+              "referencedDeclaration": 394,
               "src": "88:7:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_strings_$382",
-                "typeString": "library strings"
+                "typeIdentifier": "t_contract$_Strings_$394",
+                "typeString": "library Strings"
               }
             },
             "nodeType": "UsingForDirective",
@@ -284,11 +284,11 @@
                           "lValueRequested": false,
                           "memberName": "toSlice",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 335,
+                          "referencedDeclaration": 347,
                           "src": "335:10:0",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$_t_struct$_slice_$275_memory_ptr_$bound_to$_t_string_memory_ptr_$",
-                            "typeString": "function (string memory) pure returns (struct strings.slice memory)"
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$_t_struct$_Slice_$275_memory_ptr_$bound_to$_t_string_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (struct Strings.Slice memory)"
                           }
                         },
                         "id": 27,
@@ -301,16 +301,16 @@
                         "nodeType": "FunctionCall",
                         "src": "335:12:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_slice_$275_memory_ptr",
-                          "typeString": "struct strings.slice memory"
+                          "typeIdentifier": "t_struct$_Slice_$275_memory_ptr",
+                          "typeString": "struct Strings.Slice memory"
                         }
                       }
                     ],
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_struct$_slice_$275_memory_ptr",
-                          "typeString": "struct strings.slice memory"
+                          "typeIdentifier": "t_struct$_Slice_$275_memory_ptr",
+                          "typeString": "struct Strings.Slice memory"
                         }
                       ],
                       "expression": {
@@ -338,11 +338,11 @@
                           "lValueRequested": false,
                           "memberName": "toSlice",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 335,
+                          "referencedDeclaration": 347,
                           "src": "313:12:0",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$_t_struct$_slice_$275_memory_ptr_$bound_to$_t_string_memory_ptr_$",
-                            "typeString": "function (string memory) pure returns (struct strings.slice memory)"
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$_t_struct$_Slice_$275_memory_ptr_$bound_to$_t_string_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (struct Strings.Slice memory)"
                           }
                         },
                         "id": 23,
@@ -355,8 +355,8 @@
                         "nodeType": "FunctionCall",
                         "src": "313:14:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_slice_$275_memory_ptr",
-                          "typeString": "struct strings.slice memory"
+                          "typeIdentifier": "t_struct$_Slice_$275_memory_ptr",
+                          "typeString": "struct Strings.Slice memory"
                         }
                       },
                       "id": 24,
@@ -366,11 +366,11 @@
                       "lValueRequested": false,
                       "memberName": "concat",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 381,
+                      "referencedDeclaration": 393,
                       "src": "313:21:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_slice_$275_memory_ptr_$_t_struct$_slice_$275_memory_ptr_$returns$_t_string_memory_ptr_$bound_to$_t_struct$_slice_$275_memory_ptr_$",
-                        "typeString": "function (struct strings.slice memory,struct strings.slice memory) pure returns (string memory)"
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Slice_$275_memory_ptr_$_t_struct$_Slice_$275_memory_ptr_$returns$_t_string_memory_ptr_$bound_to$_t_struct$_Slice_$275_memory_ptr_$",
+                        "typeString": "function (struct Strings.Slice memory,struct Strings.Slice memory) pure returns (string memory)"
                       }
                     },
                     "id": 28,
@@ -1558,7 +1558,7 @@
             "body": {
               "id": 128,
               "nodeType": "Block",
-              "src": "954:97:0",
+              "src": "954:149:0",
               "statements": [
                 {
                   "expression": {
@@ -1665,7 +1665,7 @@
                         "declaration": 115,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1033:1:0",
+                        "src": "1085:1:0",
                         "valueSize": 1
                       }
                     },
@@ -1674,7 +1674,7 @@
                         "declaration": 118,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1025:1:0",
+                        "src": "1077:1:0",
                         "valueSize": 1
                       }
                     }
@@ -1682,7 +1682,7 @@
                   "id": 127,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(add(b, 32), x)\n}",
-                  "src": "991:54:0"
+                  "src": "991:106:0"
                 }
               ]
             },
@@ -1760,17 +1760,17 @@
               "src": "937:16:0"
             },
             "scope": 130,
-            "src": "889:162:0",
+            "src": "889:214:0",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
         "scope": 131,
-        "src": "58:995:0"
+        "src": "58:1047:0"
       }
     ],
-    "src": "0:1054:0"
+    "src": "0:1106:0"
   },
   "legacyAST": {
     "absolutePath": "/Users/droxey/dev/repos/rainbowcoin/contracts/Metadata.sol",
@@ -1799,7 +1799,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 131,
-        "sourceUnit": 383,
+        "sourceUnit": 395,
         "src": "25:31:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1822,13 +1822,13 @@
             "libraryName": {
               "contractScope": null,
               "id": 3,
-              "name": "strings",
+              "name": "Strings",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 382,
+              "referencedDeclaration": 394,
               "src": "88:7:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_strings_$382",
-                "typeString": "library strings"
+                "typeIdentifier": "t_contract$_Strings_$394",
+                "typeString": "library Strings"
               }
             },
             "nodeType": "UsingForDirective",
@@ -2009,11 +2009,11 @@
                           "lValueRequested": false,
                           "memberName": "toSlice",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 335,
+                          "referencedDeclaration": 347,
                           "src": "335:10:0",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$_t_struct$_slice_$275_memory_ptr_$bound_to$_t_string_memory_ptr_$",
-                            "typeString": "function (string memory) pure returns (struct strings.slice memory)"
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$_t_struct$_Slice_$275_memory_ptr_$bound_to$_t_string_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (struct Strings.Slice memory)"
                           }
                         },
                         "id": 27,
@@ -2026,16 +2026,16 @@
                         "nodeType": "FunctionCall",
                         "src": "335:12:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_slice_$275_memory_ptr",
-                          "typeString": "struct strings.slice memory"
+                          "typeIdentifier": "t_struct$_Slice_$275_memory_ptr",
+                          "typeString": "struct Strings.Slice memory"
                         }
                       }
                     ],
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_struct$_slice_$275_memory_ptr",
-                          "typeString": "struct strings.slice memory"
+                          "typeIdentifier": "t_struct$_Slice_$275_memory_ptr",
+                          "typeString": "struct Strings.Slice memory"
                         }
                       ],
                       "expression": {
@@ -2063,11 +2063,11 @@
                           "lValueRequested": false,
                           "memberName": "toSlice",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 335,
+                          "referencedDeclaration": 347,
                           "src": "313:12:0",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$_t_struct$_slice_$275_memory_ptr_$bound_to$_t_string_memory_ptr_$",
-                            "typeString": "function (string memory) pure returns (struct strings.slice memory)"
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$_t_struct$_Slice_$275_memory_ptr_$bound_to$_t_string_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (struct Strings.Slice memory)"
                           }
                         },
                         "id": 23,
@@ -2080,8 +2080,8 @@
                         "nodeType": "FunctionCall",
                         "src": "313:14:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_slice_$275_memory_ptr",
-                          "typeString": "struct strings.slice memory"
+                          "typeIdentifier": "t_struct$_Slice_$275_memory_ptr",
+                          "typeString": "struct Strings.Slice memory"
                         }
                       },
                       "id": 24,
@@ -2091,11 +2091,11 @@
                       "lValueRequested": false,
                       "memberName": "concat",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 381,
+                      "referencedDeclaration": 393,
                       "src": "313:21:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_pure$_t_struct$_slice_$275_memory_ptr_$_t_struct$_slice_$275_memory_ptr_$returns$_t_string_memory_ptr_$bound_to$_t_struct$_slice_$275_memory_ptr_$",
-                        "typeString": "function (struct strings.slice memory,struct strings.slice memory) pure returns (string memory)"
+                        "typeIdentifier": "t_function_internal_pure$_t_struct$_Slice_$275_memory_ptr_$_t_struct$_Slice_$275_memory_ptr_$returns$_t_string_memory_ptr_$bound_to$_t_struct$_Slice_$275_memory_ptr_$",
+                        "typeString": "function (struct Strings.Slice memory,struct Strings.Slice memory) pure returns (string memory)"
                       }
                     },
                     "id": 28,
@@ -3283,7 +3283,7 @@
             "body": {
               "id": 128,
               "nodeType": "Block",
-              "src": "954:97:0",
+              "src": "954:149:0",
               "statements": [
                 {
                   "expression": {
@@ -3390,7 +3390,7 @@
                         "declaration": 115,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1033:1:0",
+                        "src": "1085:1:0",
                         "valueSize": 1
                       }
                     },
@@ -3399,7 +3399,7 @@
                         "declaration": 118,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1025:1:0",
+                        "src": "1077:1:0",
                         "valueSize": 1
                       }
                     }
@@ -3407,7 +3407,7 @@
                   "id": 127,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(add(b, 32), x)\n}",
-                  "src": "991:54:0"
+                  "src": "991:106:0"
                 }
               ]
             },
@@ -3485,17 +3485,17 @@
               "src": "937:16:0"
             },
             "scope": 130,
-            "src": "889:162:0",
+            "src": "889:214:0",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
         "scope": 131,
-        "src": "58:995:0"
+        "src": "58:1047:0"
       }
     ],
-    "src": "0:1054:0"
+    "src": "0:1106:0"
   },
   "compiler": {
     "name": "solc",
@@ -3510,7 +3510,7 @@
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-06-21T01:07:58.112Z",
+  "updatedAt": "2019-06-21T01:18:36.308Z",
   "devdoc": {
     "methods": {}
   },
