@@ -12,7 +12,19 @@ module.exports = {
     reporter: 'eth-gas-reporter',
     reporterOptions: {
       currency: 'USD',
-      gasPrice: 1
+      gasPrice: 1,
+      showTimeSpent: true
+    }
+  },
+  compilers: {
+    solc: {
+      version: "^0.5.0",
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 1000
+        }
+      }
     }
   },
   networks: {
