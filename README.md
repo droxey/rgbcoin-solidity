@@ -4,22 +4,6 @@
 
 - Latest Node LTS Release (`v10.16.0`)
 
-## Run
+## Commands
 
-```bash
-npm lint:watch
-```
-
-## Test
-
-```bash
-truffle develop
-truffle(develop)> test
-```
-
-## Deploy
-
-```bash
-truffle develop
-truffle(develop)> deploy --network develop
-```
+- **Verify Token (Etherscan)**: `truffle run verify RainbowCoin --network ropsten`
