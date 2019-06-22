@@ -655,16 +655,16 @@
           }
         ],
         "contractDependencies": [
-          1651,
-          1675,
-          1932,
-          1802,
-          1905,
-          1955,
+          510,
+          520,
           757,
           1316,
-          510,
-          520
+          1651,
+          1675,
+          1802,
+          1905,
+          1932,
+          1955
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -2501,16 +2501,16 @@
           }
         ],
         "contractDependencies": [
-          1651,
-          1675,
-          1932,
-          1802,
-          1905,
-          1955,
+          510,
+          520,
           757,
           1316,
-          510,
-          520
+          1651,
+          1675,
+          1802,
+          1905,
+          1932,
+          1955
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -4258,6 +4258,12 @@
     "version": "0.5.9+commit.e560f70d.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x49bceCC31AE186e7dC0D5B83E2f48594f177a634",
+      "transactionHash": "0x823b1566ea9dd504dbd72b669032ece4ac17e89fab0b0e174646fdfc40391ace"
+    },
     "4447": {
       "events": {},
       "links": {},
@@ -4266,7 +4272,7 @@
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-06-22T00:33:10.348Z",
+  "updatedAt": "2019-06-22T01:57:11.652Z",
   "devdoc": {
     "methods": {
       "approve(address,uint256)": {

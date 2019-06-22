@@ -54,7 +54,6 @@ module.exports = {
     },
     mainnet: {
       provider() {
-        // using wallet at index 1 ----------------------------------------------------------------------------------------v
         return new HDWalletProvider(
           process.env.TESTNET_MNEMONIC,
           'https://mainnet.infura.io/v3/' + process.env.INFURA_API_KEY,
@@ -66,7 +65,6 @@ module.exports = {
     },
     kovan: {
       provider() {
-        // using wallet at index 1 ----------------------------------------------------------------------------------------v
         return new HDWalletProvider(
           process.env.TESTNET_MNEMONIC,
           'https://kovan.infura.io/v3/' + process.env.INFURA_API_KEY,
@@ -94,8 +92,8 @@ module.exports = {
           'https://ropsten.infura.io/v3/' + process.env.INFURA_API_KEY
         )
       },
-      network_id: 2
-      // gas: 4700000
+      network_id: 3,
+      gas: 4700000
     },
     sokol: {
       provider() {
