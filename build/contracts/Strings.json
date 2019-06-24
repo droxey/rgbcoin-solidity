@@ -1,12 +1,12 @@
 {
   "contractName": "Strings",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.9+commit.e560f70d\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol\":\"Strings\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[]},\"sources\":{\"/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol\":{\"keccak256\":\"0x6068fb2efb6b2e8ac70bc5d324e054377dc0e43f515d7bf3f1d276621f6e1a59\",\"urls\":[\"bzzr://2439baeda67edfe84afc6321ac8eb4e436525ea33aebd741e8464c12d50d1a08\",\"dweb:/ipfs/Qma8Gx3HSfyCyyeHfSkbozFE2m1ehQc4CHSysWACvJ2yw6\"]}},\"version\":1}",
-  "bytecode": "0x60556023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea265627a7a72305820f67e5267e7ec8d9e5af78f5b8be7b7c558e5b29a21285cb8bd3e92f30623a1b464736f6c63430005090032",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea265627a7a72305820f67e5267e7ec8d9e5af78f5b8be7b7c558e5b29a21285cb8bd3e92f30623a1b464736f6c63430005090032",
-  "sourceMap": "144:2007:3:-;;132:2:-1;166:7;155:9;146:7;137:37;255:7;249:14;246:1;241:23;235:4;232:33;222:2;;269:9;222:2;293:9;290:1;283:20;323:4;314:7;306:22;347:7;338;331:24",
-  "deployedSourceMap": "144:2007:3:-;;;;;;;;",
-  "source": "/*\n * @title String & slice utility library for Solidity contracts.\n * @author Nick Johnson <arachnid@notdot.net>\n */\n\npragma solidity ^0.5.0;\n\nlibrary Strings {\n    struct Slice {\n        uint _len;\n        uint _ptr;\n    }\n\n    function memcpy(uint dest, uint src, uint len) private pure {\n        // Copy word-length chunks while possible\n        uint _len = len;\n        uint _src = src;\n        uint _dest = dest;\n\n        for (; _len >= 32; _len -= 32) {\n            assembly {  // solium-disable-line security/no-inline-assembly\n                mstore(_dest, mload(_src))\n            }\n            _dest += 32;\n            _src += 32;\n        }\n\n        // Copy remaining bytes\n        uint mask = 256 ** (32 - _len) - 1;\n        assembly {  // solium-disable-line security/no-inline-assembly\n            let srcpart := and(mload(_src), not(mask))\n            let destpart := and(mload(_dest), mask)\n            mstore(_dest, or(destpart, srcpart))\n        }\n    }\n\n    /*\n     * @dev Returns a slice containing the entire string.\n     * @param self The string to make a slice from.\n     * @return A newly allocated slice containing the entire string.\n     */\n    function toSlice(string memory self) internal pure returns (Slice memory) {\n        uint ptr;\n\n        assembly {  // solium-disable-line security/no-inline-assembly\n            ptr := add(self, 0x20)\n        }\n\n        return Slice(bytes(self).length, ptr);\n    }\n\n    /*\n     * @dev Returns a newly allocated string containing the concatenation of\n     *      `self` and `other`.\n     * @param self The first slice to concatenate.\n     * @param other The second slice to concatenate.\n     * @return The concatenation of the two strings.\n     */\n    function concat(Slice memory self, Slice memory other) internal pure returns (string memory) {\n        string memory ret = new string(self._len + other._len);\n        uint retptr;\n        assembly {  // solium-disable-line security/no-inline-assembly\n            retptr := add(ret, 32)\n        }\n        memcpy(retptr, self._ptr, self._len);\n        memcpy(retptr + self._len, other._ptr, other._len);\n        return ret;\n    }\n}\n",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol\":\"Strings\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[]},\"sources\":{\"/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol\":{\"keccak256\":\"0x51ef2119e119129685fd343068c655a529218f6bb4dac00de2bfcb758ef75438\",\"urls\":[\"bzzr://a9c6ad0e3b5eaddd79c3fcc200224c3c3fe41862632bf42d7370f2f60e7ae7f4\"]}},\"version\":1}",
+  "bytecode": "0x604c602c600b82828239805160001a60731460008114601c57601e565bfe5b5030600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a723058207fb5a59ead30e8421d068840d3345631fdf6442dfeb71b5d29db05ecc38548b30029",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a723058207fb5a59ead30e8421d068840d3345631fdf6442dfeb71b5d29db05ecc38548b30029",
+  "sourceMap": "143:2007:3:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
+  "deployedSourceMap": "143:2007:3:-;;;;;;;;",
+  "source": "/*\n * @title String & slice utility library for Solidity contracts.\n * @author Nick Johnson <arachnid@notdot.net>\n */\n\npragma solidity 0.5.0;\n\nlibrary Strings {\n    struct Slice {\n        uint _len;\n        uint _ptr;\n    }\n\n    function memcpy(uint dest, uint src, uint len) private pure {\n        // Copy word-length chunks while possible\n        uint _len = len;\n        uint _src = src;\n        uint _dest = dest;\n\n        for (; _len >= 32; _len -= 32) {\n            assembly {  // solium-disable-line security/no-inline-assembly\n                mstore(_dest, mload(_src))\n            }\n            _dest += 32;\n            _src += 32;\n        }\n\n        // Copy remaining bytes\n        uint mask = 256 ** (32 - _len) - 1;\n        assembly {  // solium-disable-line security/no-inline-assembly\n            let srcpart := and(mload(_src), not(mask))\n            let destpart := and(mload(_dest), mask)\n            mstore(_dest, or(destpart, srcpart))\n        }\n    }\n\n    /*\n     * @dev Returns a slice containing the entire string.\n     * @param self The string to make a slice from.\n     * @return A newly allocated slice containing the entire string.\n     */\n    function toSlice(string memory self) internal pure returns (Slice memory) {\n        uint ptr;\n\n        assembly {  // solium-disable-line security/no-inline-assembly\n            ptr := add(self, 0x20)\n        }\n\n        return Slice(bytes(self).length, ptr);\n    }\n\n    /*\n     * @dev Returns a newly allocated string containing the concatenation of\n     *      `self` and `other`.\n     * @param self The first slice to concatenate.\n     * @param other The second slice to concatenate.\n     * @return The concatenation of the two strings.\n     */\n    function concat(Slice memory self, Slice memory other) internal pure returns (string memory) {\n        string memory ret = new string(self._len + other._len);\n        uint retptr;\n        assembly {  // solium-disable-line security/no-inline-assembly\n            retptr := add(ret, 32)\n        }\n        memcpy(retptr, self._ptr, self._len);\n        memcpy(retptr + self._len, other._ptr, other._len);\n        return ret;\n    }\n}\n",
   "sourcePath": "/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol",
   "ast": {
     "absolutePath": "/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol",
@@ -22,12 +22,11 @@
         "id": 335,
         "literals": [
           "solidity",
-          "^",
           "0.5",
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "119:23:3"
+        "src": "119:22:3"
       },
       {
         "baseContracts": [],
@@ -52,7 +51,7 @@
                 "name": "_len",
                 "nodeType": "VariableDeclaration",
                 "scope": 340,
-                "src": "189:9:3",
+                "src": "188:9:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -63,7 +62,7 @@
                   "id": 336,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
-                  "src": "189:4:3",
+                  "src": "188:4:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -78,7 +77,7 @@
                 "name": "_ptr",
                 "nodeType": "VariableDeclaration",
                 "scope": 340,
-                "src": "208:9:3",
+                "src": "207:9:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -89,7 +88,7 @@
                   "id": 338,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
-                  "src": "208:4:3",
+                  "src": "207:4:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -102,14 +101,14 @@
             "name": "Slice",
             "nodeType": "StructDefinition",
             "scope": 459,
-            "src": "166:58:3",
+            "src": "165:58:3",
             "visibility": "public"
           },
           {
             "body": {
               "id": 391,
               "nodeType": "Block",
-              "src": "290:681:3",
+              "src": "289:681:3",
               "statements": [
                 {
                   "assignments": [
@@ -122,7 +121,7 @@
                       "name": "_len",
                       "nodeType": "VariableDeclaration",
                       "scope": 391,
-                      "src": "350:9:3",
+                      "src": "349:9:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -133,7 +132,7 @@
                         "id": 349,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "350:4:3",
+                        "src": "349:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -151,14 +150,14 @@
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
                     "referencedDeclaration": 346,
-                    "src": "362:3:3",
+                    "src": "361:3:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "350:15:3"
+                  "src": "349:15:3"
                 },
                 {
                   "assignments": [
@@ -171,7 +170,7 @@
                       "name": "_src",
                       "nodeType": "VariableDeclaration",
                       "scope": 391,
-                      "src": "375:9:3",
+                      "src": "374:9:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -182,7 +181,7 @@
                         "id": 353,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "375:4:3",
+                        "src": "374:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -200,14 +199,14 @@
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
                     "referencedDeclaration": 344,
-                    "src": "387:3:3",
+                    "src": "386:3:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "375:15:3"
+                  "src": "374:15:3"
                 },
                 {
                   "assignments": [
@@ -220,7 +219,7 @@
                       "name": "_dest",
                       "nodeType": "VariableDeclaration",
                       "scope": 391,
-                      "src": "400:10:3",
+                      "src": "399:10:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -231,7 +230,7 @@
                         "id": 357,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "400:4:3",
+                        "src": "399:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -249,46 +248,46 @@
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
                     "referencedDeclaration": 342,
-                    "src": "413:4:3",
+                    "src": "412:4:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "400:17:3"
+                  "src": "399:17:3"
                 },
                 {
                   "body": {
                     "id": 377,
                     "nodeType": "Block",
-                    "src": "459:192:3",
+                    "src": "458:192:3",
                     "statements": [
                       {
                         "externalReferences": [
-                          {
-                            "_src": {
-                              "declaration": 354,
-                              "isOffset": false,
-                              "isSlot": false,
-                              "src": "572:4:3",
-                              "valueSize": 1
-                            }
-                          },
                           {
                             "_dest": {
                               "declaration": 358,
                               "isOffset": false,
                               "isSlot": false,
-                              "src": "559:5:3",
+                              "src": "558:5:3",
+                              "valueSize": 1
+                            }
+                          },
+                          {
+                            "_src": {
+                              "declaration": 354,
+                              "isOffset": false,
+                              "isSlot": false,
+                              "src": "571:4:3",
                               "valueSize": 1
                             }
                           }
                         ],
                         "id": 368,
                         "nodeType": "InlineAssembly",
-                        "operations": "{ mstore(_dest, mload(_src)) }",
-                        "src": "473:119:3"
+                        "operations": "{\n    mstore(_dest, mload(_src))\n}",
+                        "src": "472:137:3"
                       },
                       {
                         "expression": {
@@ -305,7 +304,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 358,
-                            "src": "605:5:3",
+                            "src": "604:5:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -323,7 +322,7 @@
                             "kind": "number",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "614:2:3",
+                            "src": "613:2:3",
                             "subdenomination": null,
                             "typeDescriptions": {
                               "typeIdentifier": "t_rational_32_by_1",
@@ -331,7 +330,7 @@
                             },
                             "value": "32"
                           },
-                          "src": "605:11:3",
+                          "src": "604:11:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -339,7 +338,7 @@
                         },
                         "id": 372,
                         "nodeType": "ExpressionStatement",
-                        "src": "605:11:3"
+                        "src": "604:11:3"
                       },
                       {
                         "expression": {
@@ -356,7 +355,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 354,
-                            "src": "630:4:3",
+                            "src": "629:4:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -374,7 +373,7 @@
                             "kind": "number",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "638:2:3",
+                            "src": "637:2:3",
                             "subdenomination": null,
                             "typeDescriptions": {
                               "typeIdentifier": "t_rational_32_by_1",
@@ -382,7 +381,7 @@
                             },
                             "value": "32"
                           },
-                          "src": "630:10:3",
+                          "src": "629:10:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -390,7 +389,7 @@
                         },
                         "id": 376,
                         "nodeType": "ExpressionStatement",
-                        "src": "630:10:3"
+                        "src": "629:10:3"
                       }
                     ]
                   },
@@ -412,7 +411,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 350,
-                      "src": "435:4:3",
+                      "src": "434:4:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -430,7 +429,7 @@
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "443:2:3",
+                      "src": "442:2:3",
                       "subdenomination": null,
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_32_by_1",
@@ -438,7 +437,7 @@
                       },
                       "value": "32"
                     },
-                    "src": "435:10:3",
+                    "src": "434:10:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -461,7 +460,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 350,
-                        "src": "447:4:3",
+                        "src": "446:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -479,7 +478,7 @@
                         "kind": "number",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "455:2:3",
+                        "src": "454:2:3",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_rational_32_by_1",
@@ -487,7 +486,7 @@
                         },
                         "value": "32"
                       },
-                      "src": "447:10:3",
+                      "src": "446:10:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -495,10 +494,10 @@
                     },
                     "id": 367,
                     "nodeType": "ExpressionStatement",
-                    "src": "447:10:3"
+                    "src": "446:10:3"
                   },
                   "nodeType": "ForStatement",
-                  "src": "428:223:3"
+                  "src": "427:223:3"
                 },
                 {
                   "assignments": [
@@ -511,7 +510,7 @@
                       "name": "mask",
                       "nodeType": "VariableDeclaration",
                       "scope": 391,
-                      "src": "693:9:3",
+                      "src": "692:9:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -522,7 +521,7 @@
                         "id": 379,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "693:4:3",
+                        "src": "692:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -565,7 +564,7 @@
                         "kind": "number",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "705:3:3",
+                        "src": "704:3:3",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_rational_256_by_1",
@@ -599,7 +598,7 @@
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "713:2:3",
+                              "src": "712:2:3",
                               "subdenomination": null,
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_32_by_1",
@@ -616,13 +615,13 @@
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
                               "referencedDeclaration": 350,
-                              "src": "718:4:3",
+                              "src": "717:4:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
                               }
                             },
-                            "src": "713:9:3",
+                            "src": "712:9:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -636,13 +635,13 @@
                         "isPure": false,
                         "lValueRequested": false,
                         "nodeType": "TupleExpression",
-                        "src": "712:11:3",
+                        "src": "711:11:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         }
                       },
-                      "src": "705:18:3",
+                      "src": "704:18:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -660,7 +659,7 @@
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "726:1:3",
+                      "src": "725:1:3",
                       "subdenomination": null,
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_1_by_1",
@@ -668,14 +667,14 @@
                       },
                       "value": "1"
                     },
-                    "src": "705:22:3",
+                    "src": "704:22:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "693:34:3"
+                  "src": "692:34:3"
                 },
                 {
                   "externalReferences": [
@@ -684,7 +683,7 @@
                         "declaration": 354,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "837:4:3",
+                        "src": "836:4:3",
                         "valueSize": 1
                       }
                     },
@@ -693,7 +692,7 @@
                         "declaration": 380,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "848:4:3",
+                        "src": "847:4:3",
                         "valueSize": 1
                       }
                     },
@@ -702,7 +701,7 @@
                         "declaration": 358,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "893:5:3",
+                        "src": "892:5:3",
                         "valueSize": 1
                       }
                     },
@@ -711,7 +710,7 @@
                         "declaration": 380,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "901:4:3",
+                        "src": "900:4:3",
                         "valueSize": 1
                       }
                     },
@@ -720,7 +719,7 @@
                         "declaration": 358,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "926:5:3",
+                        "src": "925:5:3",
                         "valueSize": 1
                       }
                     }
@@ -728,7 +727,7 @@
                   "id": 390,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let srcpart := and(mload(_src), not(mask))\n    let destpart := and(mload(_dest), mask)\n    mstore(_dest, or(destpart, srcpart))\n}",
-                  "src": "737:228:3"
+                  "src": "736:234:3"
                 }
               ]
             },
@@ -749,7 +748,7 @@
                   "name": "dest",
                   "nodeType": "VariableDeclaration",
                   "scope": 392,
-                  "src": "246:9:3",
+                  "src": "245:9:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -760,7 +759,7 @@
                     "id": 341,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "246:4:3",
+                    "src": "245:4:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -775,7 +774,7 @@
                   "name": "src",
                   "nodeType": "VariableDeclaration",
                   "scope": 392,
-                  "src": "257:8:3",
+                  "src": "256:8:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -786,7 +785,7 @@
                     "id": 343,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "257:4:3",
+                    "src": "256:4:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -801,7 +800,7 @@
                   "name": "len",
                   "nodeType": "VariableDeclaration",
                   "scope": 392,
-                  "src": "267:8:3",
+                  "src": "266:8:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -812,7 +811,7 @@
                     "id": 345,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "267:4:3",
+                    "src": "266:4:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -822,16 +821,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "245:31:3"
+              "src": "244:31:3"
             },
             "returnParameters": {
               "id": 348,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "290:0:3"
+              "src": "289:0:3"
             },
             "scope": 459,
-            "src": "230:741:3",
+            "src": "229:741:3",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "private"
@@ -840,7 +839,7 @@
             "body": {
               "id": 411,
               "nodeType": "Block",
-              "src": "1245:190:3",
+              "src": "1244:190:3",
               "statements": [
                 {
                   "assignments": [
@@ -853,7 +852,7 @@
                       "name": "ptr",
                       "nodeType": "VariableDeclaration",
                       "scope": 411,
-                      "src": "1255:8:3",
+                      "src": "1254:8:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -864,7 +863,7 @@
                         "id": 399,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1255:4:3",
+                        "src": "1254:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -877,7 +876,7 @@
                   "id": 401,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "1255:8:3"
+                  "src": "1254:8:3"
                 },
                 {
                   "externalReferences": [
@@ -886,7 +885,7 @@
                         "declaration": 400,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1349:3:3",
+                        "src": "1348:3:3",
                         "valueSize": 1
                       }
                     },
@@ -895,15 +894,15 @@
                         "declaration": 394,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1360:4:3",
+                        "src": "1359:4:3",
                         "valueSize": 1
                       }
                     }
                   ],
                   "id": 402,
                   "nodeType": "InlineAssembly",
-                  "operations": "{ ptr := add(self, 0x20) }",
-                  "src": "1274:107:3"
+                  "operations": "{\n    ptr := add(self, 0x20)\n}",
+                  "src": "1273:123:3"
                 },
                 {
                   "expression": {
@@ -921,7 +920,7 @@
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
                               "referencedDeclaration": 394,
-                              "src": "1410:4:3",
+                              "src": "1409:4:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_string_memory_ptr",
                                 "typeString": "string memory"
@@ -941,7 +940,7 @@
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "1404:5:3",
+                            "src": "1403:5:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_bytes_storage_ptr_$",
                               "typeString": "type(bytes storage pointer)"
@@ -956,7 +955,7 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1404:11:3",
+                          "src": "1403:11:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes_memory_ptr",
                             "typeString": "bytes memory"
@@ -970,7 +969,7 @@
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "1404:18:3",
+                        "src": "1403:18:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -983,7 +982,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 400,
-                        "src": "1424:3:3",
+                        "src": "1423:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1006,7 +1005,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 340,
-                      "src": "1398:5:3",
+                      "src": "1397:5:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_type$_t_struct$_Slice_$340_storage_ptr_$",
                         "typeString": "type(struct Strings.Slice storage pointer)"
@@ -1020,7 +1019,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1398:30:3",
+                    "src": "1397:30:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_struct$_Slice_$340_memory",
                       "typeString": "struct Strings.Slice memory"
@@ -1029,7 +1028,7 @@
                   "functionReturnParameters": 398,
                   "id": 410,
                   "nodeType": "Return",
-                  "src": "1391:37:3"
+                  "src": "1390:37:3"
                 }
               ]
             },
@@ -1050,7 +1049,7 @@
                   "name": "self",
                   "nodeType": "VariableDeclaration",
                   "scope": 412,
-                  "src": "1188:18:3",
+                  "src": "1187:18:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1061,7 +1060,7 @@
                     "id": 393,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1188:6:3",
+                    "src": "1187:6:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -1071,7 +1070,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1187:20:3"
+              "src": "1186:20:3"
             },
             "returnParameters": {
               "id": 398,
@@ -1083,7 +1082,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 412,
-                  "src": "1231:12:3",
+                  "src": "1230:12:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1096,7 +1095,7 @@
                     "name": "Slice",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 340,
-                    "src": "1231:5:3",
+                    "src": "1230:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_struct$_Slice_$340_storage_ptr",
                       "typeString": "struct Strings.Slice"
@@ -1106,10 +1105,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1230:14:3"
+              "src": "1229:14:3"
             },
             "scope": 459,
-            "src": "1171:264:3",
+            "src": "1170:264:3",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "internal"
@@ -1118,7 +1117,7 @@
             "body": {
               "id": 457,
               "nodeType": "Block",
-              "src": "1815:334:3",
+              "src": "1814:334:3",
               "statements": [
                 {
                   "assignments": [
@@ -1131,7 +1130,7 @@
                       "name": "ret",
                       "nodeType": "VariableDeclaration",
                       "scope": 457,
-                      "src": "1825:17:3",
+                      "src": "1824:17:3",
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
@@ -1142,7 +1141,7 @@
                         "id": 421,
                         "name": "string",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1825:6:3",
+                        "src": "1824:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_storage_ptr",
                           "typeString": "string"
@@ -1176,7 +1175,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 414,
-                            "src": "1856:4:3",
+                            "src": "1855:4:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                               "typeString": "struct Strings.Slice memory"
@@ -1190,7 +1189,7 @@
                           "memberName": "_len",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 337,
-                          "src": "1856:9:3",
+                          "src": "1855:9:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -1207,7 +1206,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 416,
-                            "src": "1868:5:3",
+                            "src": "1867:5:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                               "typeString": "struct Strings.Slice memory"
@@ -1221,13 +1220,13 @@
                           "memberName": "_len",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 337,
-                          "src": "1868:10:3",
+                          "src": "1867:10:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "src": "1856:22:3",
+                        "src": "1855:22:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1247,7 +1246,7 @@
                       "isPure": true,
                       "lValueRequested": false,
                       "nodeType": "NewExpression",
-                      "src": "1845:10:3",
+                      "src": "1844:10:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_objectcreation_pure$_t_uint256_$returns$_t_string_memory_$",
                         "typeString": "function (uint256) pure returns (string memory)"
@@ -1256,7 +1255,7 @@
                         "id": 423,
                         "name": "string",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1849:6:3",
+                        "src": "1848:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_storage_ptr",
                           "typeString": "string"
@@ -1271,14 +1270,14 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1845:34:3",
+                    "src": "1844:34:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_memory",
                       "typeString": "string memory"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "1825:54:3"
+                  "src": "1824:54:3"
                 },
                 {
                   "assignments": [
@@ -1291,7 +1290,7 @@
                       "name": "retptr",
                       "nodeType": "VariableDeclaration",
                       "scope": 457,
-                      "src": "1889:11:3",
+                      "src": "1888:11:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1302,7 +1301,7 @@
                         "id": 432,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1889:4:3",
+                        "src": "1888:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1315,7 +1314,7 @@
                   "id": 434,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "1889:11:3"
+                  "src": "1888:11:3"
                 },
                 {
                   "externalReferences": [
@@ -1324,7 +1323,7 @@
                         "declaration": 433,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1985:6:3",
+                        "src": "1984:6:3",
                         "valueSize": 1
                       }
                     },
@@ -1333,15 +1332,15 @@
                         "declaration": 422,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1999:3:3",
+                        "src": "1998:3:3",
                         "valueSize": 1
                       }
                     }
                   ],
                   "id": 435,
                   "nodeType": "InlineAssembly",
-                  "operations": "{ retptr := add(ret, 32) }",
-                  "src": "1910:107:3"
+                  "operations": "{\n    retptr := add(ret, 32)\n}",
+                  "src": "1909:122:3"
                 },
                 {
                   "expression": {
@@ -1354,7 +1353,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 433,
-                        "src": "2033:6:3",
+                        "src": "2032:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1369,7 +1368,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 414,
-                          "src": "2041:4:3",
+                          "src": "2040:4:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                             "typeString": "struct Strings.Slice memory"
@@ -1383,7 +1382,7 @@
                         "memberName": "_ptr",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 339,
-                        "src": "2041:9:3",
+                        "src": "2040:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1398,7 +1397,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 414,
-                          "src": "2052:4:3",
+                          "src": "2051:4:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                             "typeString": "struct Strings.Slice memory"
@@ -1412,7 +1411,7 @@
                         "memberName": "_len",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 337,
-                        "src": "2052:9:3",
+                        "src": "2051:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1439,7 +1438,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 392,
-                      "src": "2026:6:3",
+                      "src": "2025:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,uint256,uint256) pure"
@@ -1453,7 +1452,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "2026:36:3",
+                    "src": "2025:36:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -1461,7 +1460,7 @@
                   },
                   "id": 443,
                   "nodeType": "ExpressionStatement",
-                  "src": "2026:36:3"
+                  "src": "2025:36:3"
                 },
                 {
                   "expression": {
@@ -1485,7 +1484,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 433,
-                          "src": "2079:6:3",
+                          "src": "2078:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -1502,7 +1501,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 414,
-                            "src": "2088:4:3",
+                            "src": "2087:4:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                               "typeString": "struct Strings.Slice memory"
@@ -1516,13 +1515,13 @@
                           "memberName": "_len",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 337,
-                          "src": "2088:9:3",
+                          "src": "2087:9:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "src": "2079:18:3",
+                        "src": "2078:18:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1537,7 +1536,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 416,
-                          "src": "2099:5:3",
+                          "src": "2098:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                             "typeString": "struct Strings.Slice memory"
@@ -1551,7 +1550,7 @@
                         "memberName": "_ptr",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 339,
-                        "src": "2099:10:3",
+                        "src": "2098:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1566,7 +1565,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 416,
-                          "src": "2111:5:3",
+                          "src": "2110:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                             "typeString": "struct Strings.Slice memory"
@@ -1580,7 +1579,7 @@
                         "memberName": "_len",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 337,
-                        "src": "2111:10:3",
+                        "src": "2110:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1607,7 +1606,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 392,
-                      "src": "2072:6:3",
+                      "src": "2071:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,uint256,uint256) pure"
@@ -1621,7 +1620,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "2072:50:3",
+                    "src": "2071:50:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -1629,7 +1628,7 @@
                   },
                   "id": 454,
                   "nodeType": "ExpressionStatement",
-                  "src": "2072:50:3"
+                  "src": "2071:50:3"
                 },
                 {
                   "expression": {
@@ -1639,7 +1638,7 @@
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
                     "referencedDeclaration": 422,
-                    "src": "2139:3:3",
+                    "src": "2138:3:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_memory_ptr",
                       "typeString": "string memory"
@@ -1648,7 +1647,7 @@
                   "functionReturnParameters": 420,
                   "id": 456,
                   "nodeType": "Return",
-                  "src": "2132:10:3"
+                  "src": "2131:10:3"
                 }
               ]
             },
@@ -1669,7 +1668,7 @@
                   "name": "self",
                   "nodeType": "VariableDeclaration",
                   "scope": 458,
-                  "src": "1738:17:3",
+                  "src": "1737:17:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1682,7 +1681,7 @@
                     "name": "Slice",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 340,
-                    "src": "1738:5:3",
+                    "src": "1737:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_struct$_Slice_$340_storage_ptr",
                       "typeString": "struct Strings.Slice"
@@ -1697,7 +1696,7 @@
                   "name": "other",
                   "nodeType": "VariableDeclaration",
                   "scope": 458,
-                  "src": "1757:18:3",
+                  "src": "1756:18:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1710,7 +1709,7 @@
                     "name": "Slice",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 340,
-                    "src": "1757:5:3",
+                    "src": "1756:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_struct$_Slice_$340_storage_ptr",
                       "typeString": "struct Strings.Slice"
@@ -1720,7 +1719,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1737:39:3"
+              "src": "1736:39:3"
             },
             "returnParameters": {
               "id": 420,
@@ -1732,7 +1731,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 458,
-                  "src": "1800:13:3",
+                  "src": "1799:13:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1743,7 +1742,7 @@
                     "id": 418,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1800:6:3",
+                    "src": "1799:6:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -1753,20 +1752,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1799:15:3"
+              "src": "1798:15:3"
             },
             "scope": 459,
-            "src": "1722:427:3",
+            "src": "1721:427:3",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
         "scope": 460,
-        "src": "144:2007:3"
+        "src": "143:2007:3"
       }
     ],
-    "src": "119:2033:3"
+    "src": "119:2032:3"
   },
   "legacyAST": {
     "absolutePath": "/Users/droxey/dev/repos/rainbowcoin/contracts/helpers/strings.sol",
@@ -1782,12 +1781,11 @@
         "id": 335,
         "literals": [
           "solidity",
-          "^",
           "0.5",
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "119:23:3"
+        "src": "119:22:3"
       },
       {
         "baseContracts": [],
@@ -1812,7 +1810,7 @@
                 "name": "_len",
                 "nodeType": "VariableDeclaration",
                 "scope": 340,
-                "src": "189:9:3",
+                "src": "188:9:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1823,7 +1821,7 @@
                   "id": 336,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
-                  "src": "189:4:3",
+                  "src": "188:4:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -1838,7 +1836,7 @@
                 "name": "_ptr",
                 "nodeType": "VariableDeclaration",
                 "scope": 340,
-                "src": "208:9:3",
+                "src": "207:9:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1849,7 +1847,7 @@
                   "id": 338,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
-                  "src": "208:4:3",
+                  "src": "207:4:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -1862,14 +1860,14 @@
             "name": "Slice",
             "nodeType": "StructDefinition",
             "scope": 459,
-            "src": "166:58:3",
+            "src": "165:58:3",
             "visibility": "public"
           },
           {
             "body": {
               "id": 391,
               "nodeType": "Block",
-              "src": "290:681:3",
+              "src": "289:681:3",
               "statements": [
                 {
                   "assignments": [
@@ -1882,7 +1880,7 @@
                       "name": "_len",
                       "nodeType": "VariableDeclaration",
                       "scope": 391,
-                      "src": "350:9:3",
+                      "src": "349:9:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1893,7 +1891,7 @@
                         "id": 349,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "350:4:3",
+                        "src": "349:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1911,14 +1909,14 @@
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
                     "referencedDeclaration": 346,
-                    "src": "362:3:3",
+                    "src": "361:3:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "350:15:3"
+                  "src": "349:15:3"
                 },
                 {
                   "assignments": [
@@ -1931,7 +1929,7 @@
                       "name": "_src",
                       "nodeType": "VariableDeclaration",
                       "scope": 391,
-                      "src": "375:9:3",
+                      "src": "374:9:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1942,7 +1940,7 @@
                         "id": 353,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "375:4:3",
+                        "src": "374:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1960,14 +1958,14 @@
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
                     "referencedDeclaration": 344,
-                    "src": "387:3:3",
+                    "src": "386:3:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "375:15:3"
+                  "src": "374:15:3"
                 },
                 {
                   "assignments": [
@@ -1980,7 +1978,7 @@
                       "name": "_dest",
                       "nodeType": "VariableDeclaration",
                       "scope": 391,
-                      "src": "400:10:3",
+                      "src": "399:10:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1991,7 +1989,7 @@
                         "id": 357,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "400:4:3",
+                        "src": "399:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2009,46 +2007,46 @@
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
                     "referencedDeclaration": 342,
-                    "src": "413:4:3",
+                    "src": "412:4:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "400:17:3"
+                  "src": "399:17:3"
                 },
                 {
                   "body": {
                     "id": 377,
                     "nodeType": "Block",
-                    "src": "459:192:3",
+                    "src": "458:192:3",
                     "statements": [
                       {
                         "externalReferences": [
-                          {
-                            "_src": {
-                              "declaration": 354,
-                              "isOffset": false,
-                              "isSlot": false,
-                              "src": "572:4:3",
-                              "valueSize": 1
-                            }
-                          },
                           {
                             "_dest": {
                               "declaration": 358,
                               "isOffset": false,
                               "isSlot": false,
-                              "src": "559:5:3",
+                              "src": "558:5:3",
+                              "valueSize": 1
+                            }
+                          },
+                          {
+                            "_src": {
+                              "declaration": 354,
+                              "isOffset": false,
+                              "isSlot": false,
+                              "src": "571:4:3",
                               "valueSize": 1
                             }
                           }
                         ],
                         "id": 368,
                         "nodeType": "InlineAssembly",
-                        "operations": "{ mstore(_dest, mload(_src)) }",
-                        "src": "473:119:3"
+                        "operations": "{\n    mstore(_dest, mload(_src))\n}",
+                        "src": "472:137:3"
                       },
                       {
                         "expression": {
@@ -2065,7 +2063,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 358,
-                            "src": "605:5:3",
+                            "src": "604:5:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -2083,7 +2081,7 @@
                             "kind": "number",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "614:2:3",
+                            "src": "613:2:3",
                             "subdenomination": null,
                             "typeDescriptions": {
                               "typeIdentifier": "t_rational_32_by_1",
@@ -2091,7 +2089,7 @@
                             },
                             "value": "32"
                           },
-                          "src": "605:11:3",
+                          "src": "604:11:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -2099,7 +2097,7 @@
                         },
                         "id": 372,
                         "nodeType": "ExpressionStatement",
-                        "src": "605:11:3"
+                        "src": "604:11:3"
                       },
                       {
                         "expression": {
@@ -2116,7 +2114,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 354,
-                            "src": "630:4:3",
+                            "src": "629:4:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -2134,7 +2132,7 @@
                             "kind": "number",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "638:2:3",
+                            "src": "637:2:3",
                             "subdenomination": null,
                             "typeDescriptions": {
                               "typeIdentifier": "t_rational_32_by_1",
@@ -2142,7 +2140,7 @@
                             },
                             "value": "32"
                           },
-                          "src": "630:10:3",
+                          "src": "629:10:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -2150,7 +2148,7 @@
                         },
                         "id": 376,
                         "nodeType": "ExpressionStatement",
-                        "src": "630:10:3"
+                        "src": "629:10:3"
                       }
                     ]
                   },
@@ -2172,7 +2170,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 350,
-                      "src": "435:4:3",
+                      "src": "434:4:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2190,7 +2188,7 @@
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "443:2:3",
+                      "src": "442:2:3",
                       "subdenomination": null,
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_32_by_1",
@@ -2198,7 +2196,7 @@
                       },
                       "value": "32"
                     },
-                    "src": "435:10:3",
+                    "src": "434:10:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -2221,7 +2219,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 350,
-                        "src": "447:4:3",
+                        "src": "446:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2239,7 +2237,7 @@
                         "kind": "number",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "455:2:3",
+                        "src": "454:2:3",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_rational_32_by_1",
@@ -2247,7 +2245,7 @@
                         },
                         "value": "32"
                       },
-                      "src": "447:10:3",
+                      "src": "446:10:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2255,10 +2253,10 @@
                     },
                     "id": 367,
                     "nodeType": "ExpressionStatement",
-                    "src": "447:10:3"
+                    "src": "446:10:3"
                   },
                   "nodeType": "ForStatement",
-                  "src": "428:223:3"
+                  "src": "427:223:3"
                 },
                 {
                   "assignments": [
@@ -2271,7 +2269,7 @@
                       "name": "mask",
                       "nodeType": "VariableDeclaration",
                       "scope": 391,
-                      "src": "693:9:3",
+                      "src": "692:9:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -2282,7 +2280,7 @@
                         "id": 379,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "693:4:3",
+                        "src": "692:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2325,7 +2323,7 @@
                         "kind": "number",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "705:3:3",
+                        "src": "704:3:3",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_rational_256_by_1",
@@ -2359,7 +2357,7 @@
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "713:2:3",
+                              "src": "712:2:3",
                               "subdenomination": null,
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_32_by_1",
@@ -2376,13 +2374,13 @@
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
                               "referencedDeclaration": 350,
-                              "src": "718:4:3",
+                              "src": "717:4:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
                               }
                             },
-                            "src": "713:9:3",
+                            "src": "712:9:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -2396,13 +2394,13 @@
                         "isPure": false,
                         "lValueRequested": false,
                         "nodeType": "TupleExpression",
-                        "src": "712:11:3",
+                        "src": "711:11:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         }
                       },
-                      "src": "705:18:3",
+                      "src": "704:18:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2420,7 +2418,7 @@
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "726:1:3",
+                      "src": "725:1:3",
                       "subdenomination": null,
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_1_by_1",
@@ -2428,14 +2426,14 @@
                       },
                       "value": "1"
                     },
-                    "src": "705:22:3",
+                    "src": "704:22:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "693:34:3"
+                  "src": "692:34:3"
                 },
                 {
                   "externalReferences": [
@@ -2444,7 +2442,7 @@
                         "declaration": 354,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "837:4:3",
+                        "src": "836:4:3",
                         "valueSize": 1
                       }
                     },
@@ -2453,7 +2451,7 @@
                         "declaration": 380,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "848:4:3",
+                        "src": "847:4:3",
                         "valueSize": 1
                       }
                     },
@@ -2462,7 +2460,7 @@
                         "declaration": 358,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "893:5:3",
+                        "src": "892:5:3",
                         "valueSize": 1
                       }
                     },
@@ -2471,7 +2469,7 @@
                         "declaration": 380,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "901:4:3",
+                        "src": "900:4:3",
                         "valueSize": 1
                       }
                     },
@@ -2480,7 +2478,7 @@
                         "declaration": 358,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "926:5:3",
+                        "src": "925:5:3",
                         "valueSize": 1
                       }
                     }
@@ -2488,7 +2486,7 @@
                   "id": 390,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let srcpart := and(mload(_src), not(mask))\n    let destpart := and(mload(_dest), mask)\n    mstore(_dest, or(destpart, srcpart))\n}",
-                  "src": "737:228:3"
+                  "src": "736:234:3"
                 }
               ]
             },
@@ -2509,7 +2507,7 @@
                   "name": "dest",
                   "nodeType": "VariableDeclaration",
                   "scope": 392,
-                  "src": "246:9:3",
+                  "src": "245:9:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2520,7 +2518,7 @@
                     "id": 341,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "246:4:3",
+                    "src": "245:4:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2535,7 +2533,7 @@
                   "name": "src",
                   "nodeType": "VariableDeclaration",
                   "scope": 392,
-                  "src": "257:8:3",
+                  "src": "256:8:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2546,7 +2544,7 @@
                     "id": 343,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "257:4:3",
+                    "src": "256:4:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2561,7 +2559,7 @@
                   "name": "len",
                   "nodeType": "VariableDeclaration",
                   "scope": 392,
-                  "src": "267:8:3",
+                  "src": "266:8:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2572,7 +2570,7 @@
                     "id": 345,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "267:4:3",
+                    "src": "266:4:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2582,16 +2580,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "245:31:3"
+              "src": "244:31:3"
             },
             "returnParameters": {
               "id": 348,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "290:0:3"
+              "src": "289:0:3"
             },
             "scope": 459,
-            "src": "230:741:3",
+            "src": "229:741:3",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "private"
@@ -2600,7 +2598,7 @@
             "body": {
               "id": 411,
               "nodeType": "Block",
-              "src": "1245:190:3",
+              "src": "1244:190:3",
               "statements": [
                 {
                   "assignments": [
@@ -2613,7 +2611,7 @@
                       "name": "ptr",
                       "nodeType": "VariableDeclaration",
                       "scope": 411,
-                      "src": "1255:8:3",
+                      "src": "1254:8:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -2624,7 +2622,7 @@
                         "id": 399,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1255:4:3",
+                        "src": "1254:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2637,7 +2635,7 @@
                   "id": 401,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "1255:8:3"
+                  "src": "1254:8:3"
                 },
                 {
                   "externalReferences": [
@@ -2646,7 +2644,7 @@
                         "declaration": 400,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1349:3:3",
+                        "src": "1348:3:3",
                         "valueSize": 1
                       }
                     },
@@ -2655,15 +2653,15 @@
                         "declaration": 394,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1360:4:3",
+                        "src": "1359:4:3",
                         "valueSize": 1
                       }
                     }
                   ],
                   "id": 402,
                   "nodeType": "InlineAssembly",
-                  "operations": "{ ptr := add(self, 0x20) }",
-                  "src": "1274:107:3"
+                  "operations": "{\n    ptr := add(self, 0x20)\n}",
+                  "src": "1273:123:3"
                 },
                 {
                   "expression": {
@@ -2681,7 +2679,7 @@
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
                               "referencedDeclaration": 394,
-                              "src": "1410:4:3",
+                              "src": "1409:4:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_string_memory_ptr",
                                 "typeString": "string memory"
@@ -2701,7 +2699,7 @@
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "1404:5:3",
+                            "src": "1403:5:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_bytes_storage_ptr_$",
                               "typeString": "type(bytes storage pointer)"
@@ -2716,7 +2714,7 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1404:11:3",
+                          "src": "1403:11:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes_memory_ptr",
                             "typeString": "bytes memory"
@@ -2730,7 +2728,7 @@
                         "memberName": "length",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "1404:18:3",
+                        "src": "1403:18:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2743,7 +2741,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 400,
-                        "src": "1424:3:3",
+                        "src": "1423:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2766,7 +2764,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 340,
-                      "src": "1398:5:3",
+                      "src": "1397:5:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_type$_t_struct$_Slice_$340_storage_ptr_$",
                         "typeString": "type(struct Strings.Slice storage pointer)"
@@ -2780,7 +2778,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1398:30:3",
+                    "src": "1397:30:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_struct$_Slice_$340_memory",
                       "typeString": "struct Strings.Slice memory"
@@ -2789,7 +2787,7 @@
                   "functionReturnParameters": 398,
                   "id": 410,
                   "nodeType": "Return",
-                  "src": "1391:37:3"
+                  "src": "1390:37:3"
                 }
               ]
             },
@@ -2810,7 +2808,7 @@
                   "name": "self",
                   "nodeType": "VariableDeclaration",
                   "scope": 412,
-                  "src": "1188:18:3",
+                  "src": "1187:18:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -2821,7 +2819,7 @@
                     "id": 393,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1188:6:3",
+                    "src": "1187:6:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -2831,7 +2829,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1187:20:3"
+              "src": "1186:20:3"
             },
             "returnParameters": {
               "id": 398,
@@ -2843,7 +2841,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 412,
-                  "src": "1231:12:3",
+                  "src": "1230:12:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -2856,7 +2854,7 @@
                     "name": "Slice",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 340,
-                    "src": "1231:5:3",
+                    "src": "1230:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_struct$_Slice_$340_storage_ptr",
                       "typeString": "struct Strings.Slice"
@@ -2866,10 +2864,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1230:14:3"
+              "src": "1229:14:3"
             },
             "scope": 459,
-            "src": "1171:264:3",
+            "src": "1170:264:3",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "internal"
@@ -2878,7 +2876,7 @@
             "body": {
               "id": 457,
               "nodeType": "Block",
-              "src": "1815:334:3",
+              "src": "1814:334:3",
               "statements": [
                 {
                   "assignments": [
@@ -2891,7 +2889,7 @@
                       "name": "ret",
                       "nodeType": "VariableDeclaration",
                       "scope": 457,
-                      "src": "1825:17:3",
+                      "src": "1824:17:3",
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
@@ -2902,7 +2900,7 @@
                         "id": 421,
                         "name": "string",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1825:6:3",
+                        "src": "1824:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_storage_ptr",
                           "typeString": "string"
@@ -2936,7 +2934,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 414,
-                            "src": "1856:4:3",
+                            "src": "1855:4:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                               "typeString": "struct Strings.Slice memory"
@@ -2950,7 +2948,7 @@
                           "memberName": "_len",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 337,
-                          "src": "1856:9:3",
+                          "src": "1855:9:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -2967,7 +2965,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 416,
-                            "src": "1868:5:3",
+                            "src": "1867:5:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                               "typeString": "struct Strings.Slice memory"
@@ -2981,13 +2979,13 @@
                           "memberName": "_len",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 337,
-                          "src": "1868:10:3",
+                          "src": "1867:10:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "src": "1856:22:3",
+                        "src": "1855:22:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -3007,7 +3005,7 @@
                       "isPure": true,
                       "lValueRequested": false,
                       "nodeType": "NewExpression",
-                      "src": "1845:10:3",
+                      "src": "1844:10:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_objectcreation_pure$_t_uint256_$returns$_t_string_memory_$",
                         "typeString": "function (uint256) pure returns (string memory)"
@@ -3016,7 +3014,7 @@
                         "id": 423,
                         "name": "string",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1849:6:3",
+                        "src": "1848:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_storage_ptr",
                           "typeString": "string"
@@ -3031,14 +3029,14 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1845:34:3",
+                    "src": "1844:34:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_memory",
                       "typeString": "string memory"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "1825:54:3"
+                  "src": "1824:54:3"
                 },
                 {
                   "assignments": [
@@ -3051,7 +3049,7 @@
                       "name": "retptr",
                       "nodeType": "VariableDeclaration",
                       "scope": 457,
-                      "src": "1889:11:3",
+                      "src": "1888:11:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -3062,7 +3060,7 @@
                         "id": 432,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1889:4:3",
+                        "src": "1888:4:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -3075,7 +3073,7 @@
                   "id": 434,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "1889:11:3"
+                  "src": "1888:11:3"
                 },
                 {
                   "externalReferences": [
@@ -3084,7 +3082,7 @@
                         "declaration": 433,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1985:6:3",
+                        "src": "1984:6:3",
                         "valueSize": 1
                       }
                     },
@@ -3093,15 +3091,15 @@
                         "declaration": 422,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "1999:3:3",
+                        "src": "1998:3:3",
                         "valueSize": 1
                       }
                     }
                   ],
                   "id": 435,
                   "nodeType": "InlineAssembly",
-                  "operations": "{ retptr := add(ret, 32) }",
-                  "src": "1910:107:3"
+                  "operations": "{\n    retptr := add(ret, 32)\n}",
+                  "src": "1909:122:3"
                 },
                 {
                   "expression": {
@@ -3114,7 +3112,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 433,
-                        "src": "2033:6:3",
+                        "src": "2032:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -3129,7 +3127,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 414,
-                          "src": "2041:4:3",
+                          "src": "2040:4:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                             "typeString": "struct Strings.Slice memory"
@@ -3143,7 +3141,7 @@
                         "memberName": "_ptr",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 339,
-                        "src": "2041:9:3",
+                        "src": "2040:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -3158,7 +3156,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 414,
-                          "src": "2052:4:3",
+                          "src": "2051:4:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                             "typeString": "struct Strings.Slice memory"
@@ -3172,7 +3170,7 @@
                         "memberName": "_len",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 337,
-                        "src": "2052:9:3",
+                        "src": "2051:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -3199,7 +3197,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 392,
-                      "src": "2026:6:3",
+                      "src": "2025:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,uint256,uint256) pure"
@@ -3213,7 +3211,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "2026:36:3",
+                    "src": "2025:36:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -3221,7 +3219,7 @@
                   },
                   "id": 443,
                   "nodeType": "ExpressionStatement",
-                  "src": "2026:36:3"
+                  "src": "2025:36:3"
                 },
                 {
                   "expression": {
@@ -3245,7 +3243,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 433,
-                          "src": "2079:6:3",
+                          "src": "2078:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -3262,7 +3260,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 414,
-                            "src": "2088:4:3",
+                            "src": "2087:4:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                               "typeString": "struct Strings.Slice memory"
@@ -3276,13 +3274,13 @@
                           "memberName": "_len",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": 337,
-                          "src": "2088:9:3",
+                          "src": "2087:9:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "src": "2079:18:3",
+                        "src": "2078:18:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -3297,7 +3295,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 416,
-                          "src": "2099:5:3",
+                          "src": "2098:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                             "typeString": "struct Strings.Slice memory"
@@ -3311,7 +3309,7 @@
                         "memberName": "_ptr",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 339,
-                        "src": "2099:10:3",
+                        "src": "2098:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -3326,7 +3324,7 @@
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 416,
-                          "src": "2111:5:3",
+                          "src": "2110:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_struct$_Slice_$340_memory_ptr",
                             "typeString": "struct Strings.Slice memory"
@@ -3340,7 +3338,7 @@
                         "memberName": "_len",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": 337,
-                        "src": "2111:10:3",
+                        "src": "2110:10:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -3367,7 +3365,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 392,
-                      "src": "2072:6:3",
+                      "src": "2071:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,uint256,uint256) pure"
@@ -3381,7 +3379,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "2072:50:3",
+                    "src": "2071:50:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -3389,7 +3387,7 @@
                   },
                   "id": 454,
                   "nodeType": "ExpressionStatement",
-                  "src": "2072:50:3"
+                  "src": "2071:50:3"
                 },
                 {
                   "expression": {
@@ -3399,7 +3397,7 @@
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
                     "referencedDeclaration": 422,
-                    "src": "2139:3:3",
+                    "src": "2138:3:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_memory_ptr",
                       "typeString": "string memory"
@@ -3408,7 +3406,7 @@
                   "functionReturnParameters": 420,
                   "id": 456,
                   "nodeType": "Return",
-                  "src": "2132:10:3"
+                  "src": "2131:10:3"
                 }
               ]
             },
@@ -3429,7 +3427,7 @@
                   "name": "self",
                   "nodeType": "VariableDeclaration",
                   "scope": 458,
-                  "src": "1738:17:3",
+                  "src": "1737:17:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -3442,7 +3440,7 @@
                     "name": "Slice",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 340,
-                    "src": "1738:5:3",
+                    "src": "1737:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_struct$_Slice_$340_storage_ptr",
                       "typeString": "struct Strings.Slice"
@@ -3457,7 +3455,7 @@
                   "name": "other",
                   "nodeType": "VariableDeclaration",
                   "scope": 458,
-                  "src": "1757:18:3",
+                  "src": "1756:18:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -3470,7 +3468,7 @@
                     "name": "Slice",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 340,
-                    "src": "1757:5:3",
+                    "src": "1756:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_struct$_Slice_$340_storage_ptr",
                       "typeString": "struct Strings.Slice"
@@ -3480,7 +3478,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1737:39:3"
+              "src": "1736:39:3"
             },
             "returnParameters": {
               "id": 420,
@@ -3492,7 +3490,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 458,
-                  "src": "1800:13:3",
+                  "src": "1799:13:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -3503,7 +3501,7 @@
                     "id": 418,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1800:6:3",
+                    "src": "1799:6:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -3513,28 +3511,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1799:15:3"
+              "src": "1798:15:3"
             },
             "scope": 459,
-            "src": "1722:427:3",
+            "src": "1721:427:3",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
         "scope": 460,
-        "src": "144:2007:3"
+        "src": "143:2007:3"
       }
     ],
-    "src": "119:2033:3"
+    "src": "119:2032:3"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.9+commit.e560f70d.Emscripten.clang"
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-06-22T00:33:04.833Z",
+  "updatedAt": "2019-06-24T17:23:34.642Z",
   "devdoc": {
     "methods": {}
   },

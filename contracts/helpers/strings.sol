@@ -3,7 +3,7 @@
  * @author Nick Johnson <arachnid@notdot.net>
  */
 
-pragma solidity ^0.5.0;
+pragma solidity 0.5.0;
 
 library Strings {
     struct Slice {
