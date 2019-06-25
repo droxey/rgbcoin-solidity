@@ -14,7 +14,7 @@ contract RainbowCoin is ERC721Full, Ownable {
         uint8 blue;
     }
 
-    RGBColor[] colors;
+    RGBColor[] tokens;
 
     constructor(string memory name, string memory symbol, address _metadata) public ERC721Full(name, symbol) {
         name = "RainbowCoin";
@@ -22,18 +22,18 @@ contract RainbowCoin is ERC721Full, Ownable {
         metadata = _metadata;
     }
 
-    function getColor(uint _colorId) public view returns(uint8 red, uint8 green, uint8 blue) {
-        RGBColor memory _color = colors[_colorId];
+    function getColor(uint _tokenId) public view returns(uint8 red, uint8 green, uint8 blue) {
+        RGBColor memory _color = tokens[_tokenId];
 
         red = _color.red;
         green = _color.green;
         blue = _color.blue;
     }
 
-    function mint(uint8 _red, uint8 _green, uint8 _blue) public onlyOwner {
+    function mint(uint8 _red, uint8 _green, uint8 _blue) public payable onlyOwner {
         RGBColor memory _color = RGBColor({ red: _red, green: _green, blue: _blue });
-        uint _colorId = colors.push(_color);
-        _mint(msg.sender, _colorId);
+        uint _tokenId = tokens.push(_color);
+        _mint(msg.sender, _tokenId);
     }
 
     function updateMetadata(address _metadata) public onlyOwner {
