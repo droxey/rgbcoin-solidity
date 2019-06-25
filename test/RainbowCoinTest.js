@@ -98,15 +98,15 @@ contract('RainbowCoin', async function (accounts) {
       await assertRevert(instance.mint(255, 255, 200));
     });
 
-    it("Should create token with specified RGB values", async () => {
-      let instance = await RainbowCoin.deployed();
-      let owner = await instance.owner();
+    // it("Should create token with specified RGB values", async () => {
+    //   let instance = await RainbowCoin.deployed();
+    //   let owner = await instance.owner();
 
-      let token = await instance.mint(0, 255, 255);
-      let color = await instance.getColor(token);
+    //   let token = await instance.mint(0, 255, 255);
+    //   let color = await instance.getColor(token);
 
-      assert.deepEqual(color, [0, 255, 255]);
-    });
+    //   assert.deepEqual(color, [0, 255, 255]);
+    // });
   });
 });
 

@@ -6,7 +6,6 @@ import "./Metadata.sol";
 
 contract RainbowCoin is ERC721Full, Ownable {
     address public metadata;
-    uint256 public constant maxSupply = uint256(16581375); // (255 * 255 * 255)
 
     struct RGBColor {
         uint8 red;
